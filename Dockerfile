@@ -5,7 +5,7 @@ ARG CLIENT_SECRET
 ARG TENANT_ID
 ARG SUBSCRIPTION_ID
 ARG HELM_VERSION=2.12.0
-#ARG KUBECTL_VERSION=2.12.0
+ARG KUBECTL_VERSION=1.15.0
 
 ENV ARM_CLIENT_ID=$CLIENT_ID
 ENV ARM_CLIENT_SECRET=$CLIENT_SECRET
@@ -36,5 +36,9 @@ RUN apk add --update --no-cache curl ca-certificates && \
     apk del curl && \
     rm -f /var/cache/apk/*
 
-
+#Instalacion kubectl
+RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
+  chmod +x /usr/bin/kubectl && \
+  kubectl version --client
+  
 CMD ["/bin/sh"]
