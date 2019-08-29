@@ -17,6 +17,7 @@ ENV TF_VAR_client_secret=$ARM_CLIENT_SECRET
 #instalacion az-cli
 RUN \
   apk update && \
+  apk add jq \
   apk add bash py-pip && \
   apk add --virtual=build gcc libffi-dev musl-dev openssl-dev python-dev make && \
   pip --no-cache-dir install -U pip && \
